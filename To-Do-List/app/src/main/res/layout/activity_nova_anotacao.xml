@@ -58,8 +58,8 @@
 
     <EditText
         android:id="@+id/editTextDescricao"
-        android:layout_width="342dp"
-        android:layout_height="273dp"
+        android:layout_width="334dp"
+        android:layout_height="113dp"
         android:layout_marginTop="33dp"
         android:ems="10"
         android:gravity="start|top"
@@ -67,14 +67,49 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewDescricao"
         tools:layout_editor_absoluteX="30dp" />
 
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="331dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="33dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescricao"
+        tools:layout_editor_absoluteX="30dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:text="Prioridade:"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/radioPrioMin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Minima" />
+
+        <RadioButton
+            android:id="@+id/radioPrioMed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Média" />
+
+        <RadioButton
+            android:id="@+id/radioPrioMax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Máxima" />
+    </RadioGroup>
+
     <Button
         android:id="@+id/btnGravarAnotacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="347dp"
+        android:layout_height="50dp"
         android:layout_marginTop="33dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginEnd="40dp"
         android:text="GRAVAR"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDescricao" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 </android.support.constraint.ConstraintLayout>
