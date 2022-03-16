@@ -7,15 +7,52 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.example.to_do_list.util.ItemAdapter;
+import com.example.to_do_list.util.Notes;
+import com.example.to_do_list.util.Persistence;
+import com.example.to_do_list.util.Singleton;
 
 public class MainActivity extends AppCompatActivity {
+
+    private void loadNotes(){
+        ListView listview;
+        ItemAdapter adapter = new ItemAdapter(this,R.layout.layout_note, Singleton.getNotes().getItens());
+        listview=((ListView)findViewById(R.id.listview_notes));
+        listview.setAdapter(adapter);
+
+        /*
+            **** Implementar click longo, click curto
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String cond=adapter.getItem(i).getCondicao();
+                Toast.makeText(getApplicationContext(),cond,Toast.LENGTH_LONG).show();
+            }
+        });*/
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(Persistence.readData("notes.dad",this))
+            loadNotes();
+        else
+            Toast.makeText(this,"Erro ao abrir arquivo de atividades",Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+
+        Notes notes=Singleton.getNotes();
+        if(!Persistence.writeData("notes.dad",notes,this))
+            Toast.makeText(this,"Erro ao salvar arquivo de atividades",Toast.LENGTH_LONG).show();
+    }
 
     /*
         Menu superior
