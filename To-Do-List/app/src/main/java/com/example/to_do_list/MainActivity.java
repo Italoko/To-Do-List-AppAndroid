@@ -39,10 +39,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Persistence.readData("notes.dad",this))
-            loadNotes();
-        else
-            Toast.makeText(this,"Erro ao abrir arquivo de atividades",Toast.LENGTH_LONG).show();
+        Persistence.readData("notes.dad",this);
+        loadNotes();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        loadNotes();
     }
 
     @Override

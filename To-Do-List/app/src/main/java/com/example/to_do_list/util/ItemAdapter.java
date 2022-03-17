@@ -28,7 +28,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater)
-                    getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(this.layout,parent,false);
         }
         TextView txtNomeNote =(TextView)convertView.findViewById(R.id.txtNomeNote);
@@ -40,7 +40,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
        switch(item.getPrioridade()){
            case 1:
-               convertView.setBackgroundColor(Color.GREEN);
+               convertView.setBackgroundColor(Color.BLUE);
                break;
            case 2:
                txtNomeNote.setTextColor(Color.BLACK);
