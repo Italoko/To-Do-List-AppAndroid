@@ -38,6 +38,7 @@ public class Persistence implements Serializable
             ObjectOutputStream out = new ObjectOutputStream(fout);
             out.writeObject(object);
             out.close();
+            success = true;
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
