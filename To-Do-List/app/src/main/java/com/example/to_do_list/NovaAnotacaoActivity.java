@@ -1,18 +1,21 @@
 package com.example.to_do_list;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.example.to_do_list.util.Item;
 import com.example.to_do_list.util.Singleton;
 
 public class NovaAnotacaoActivity extends AppCompatActivity {
 
+    private EditText editTextNome, editTextDescricao;
+    private RadioButton min,med,max;
+
     private int getPrioridade(){
-        RadioButton min = findViewById(R.id.radioPrioMin);
-        RadioButton med = findViewById(R.id.radioPrioMed);
-        RadioButton max = findViewById(R.id.radioPrioMax);
 
         if(min.isChecked())
             return 1;
@@ -24,17 +27,50 @@ public class NovaAnotacaoActivity extends AppCompatActivity {
         return 1;
     }
 
+    private void clearScreen(){
+        editTextNome.setText("");
+        editTextDescricao.setText("");
+        min.setChecked(true);
+    }
+
+    private boolean validateFields(@NonNull String nome,  @NonNull String desc){
+        if (nome.isEmpty())
+        {
+            Toast.makeText(this,"Digite nome da nota.",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (desc.isEmpty())
+        {
+            Toast.makeText(this,"Digite a descrição da nota.",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else
+            return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_anotacao);
 
-        findViewById(R.id.btnGravarAnotacao).setOnClickListener(e->{
-            String noteName = findViewById(R.id.editTextNome).toString();
-            String noteDesc = findViewById(R.id.editTextDescricao).toString();
+        editTextNome = findViewById(R.id.editTextNome);
+        editTextDescricao = findViewById(R.id.editTextDescricao);
 
-            Item note = new Item(noteName,noteDesc,getPrioridade());
-            Singleton.getNotes().add(note);
+        min = findViewById(R.id.radioPrioMin);
+        med = findViewById(R.id.radioPrioMed);
+        max = findViewById(R.id.radioPrioMax);
+
+        findViewById(R.id.btnGravarAnotacao).setOnClickListener(e->{
+            String noteName = editTextNome.getText().toString();
+            String noteDesc = editTextDescricao.getText().toString();
+
+            if(validateFields(noteName,noteDesc)){
+                Item note = new Item(noteName,noteDesc,getPrioridade());
+                Singleton.getNotes().add(note);
+
+                Toast.makeText(this,"Nota registrada com sucesso.",Toast.LENGTH_LONG).show();
+                clearScreen();
+            }
         });
     }
 }
