@@ -43,10 +43,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(Singleton.getNotes().remove(i))
                 {
-                    loadNotes();
+                    adapter.notifyDataSetChanged();
                     Toast.makeText(MainActivity.this,"Anotação excluída.",Toast.LENGTH_LONG);
                 }
-
                 return true;
             }
         });
