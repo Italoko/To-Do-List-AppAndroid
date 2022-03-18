@@ -25,15 +25,29 @@ public class MainActivity extends AppCompatActivity {
         listview=((ListView)findViewById(R.id.listview_notes));
         listview.setAdapter(adapter);
 
+        //Click curto
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override // Click curto
+            @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(),AnotacaoDetalhadaActivity.class);
                 intent.putExtra("nome",adapter.getItem(i).getNome());
                 intent.putExtra("descricao",adapter.getItem(i).getDescricao());
                 intent.putExtra("prioridade",adapter.getItem(i).getPrioridade());
                 startActivity(intent);
+            }
+        });
+
+        // Click longo
+        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(Singleton.getNotes().remove(i))
+                {
+                    loadNotes();
+                    Toast.makeText(MainActivity.this,"Anotação excluída.",Toast.LENGTH_LONG);
+                }
+
+                return true;
             }
         });
     }
@@ -54,17 +68,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
-        super.onDestroy();
-
+    protected void onStop() {
+        super.onStop();
         Notes notes=Singleton.getNotes();
         if(!Persistence.writeData("notes.dad",notes,this))
             Toast.makeText(this,"Erro ao salvar arquivo de atividades",Toast.LENGTH_LONG).show();
     }
 
-    /*
-        Menu superior
-    */
+
+    //Menu superior
     @Override
     // Carrega menu superior
     public boolean onCreateOptionsMenu(Menu menu)
