@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,15 +25,17 @@ public class MainActivity extends AppCompatActivity {
         listview=((ListView)findViewById(R.id.listview_notes));
         listview.setAdapter(adapter);
 
-        /*
-            **** Implementar click longo, click curto
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
+
+            @Override // Click curto
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String cond=adapter.getItem(i).getCondicao();
-                Toast.makeText(getApplicationContext(),cond,Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(),AnotacaoDetalhadaActivity.class);
+                intent.putExtra("nome",adapter.getItem(i).getNome());
+                intent.putExtra("descricao",adapter.getItem(i).getDescricao());
+                intent.putExtra("prioridade",adapter.getItem(i).getPrioridade());
+                startActivity(intent);
             }
-        });*/
+        });
     }
 
     @Override
