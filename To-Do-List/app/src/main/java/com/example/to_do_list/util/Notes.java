@@ -14,6 +14,15 @@ public class Notes implements Serializable {
     {
         itens.add(i);
     }
+    public boolean remove(int i)
+    {
+        if(i <= itens.size())
+        {
+            itens.remove(i);
+            return true;
+        }
+        return false;
+    }
 
     public List<Item> getItens() {
         return itens;
