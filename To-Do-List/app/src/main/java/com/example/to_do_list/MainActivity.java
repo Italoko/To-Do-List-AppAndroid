@@ -17,11 +17,16 @@ import com.example.to_do_list.util.Notes;
 import com.example.to_do_list.util.Persistence;
 import com.example.to_do_list.util.Singleton;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 public class MainActivity extends AppCompatActivity {
 
+    private ListView listview;
+    private ItemAdapter adapter;
+
     private void loadNotes(){
-        ListView listview;
-        ItemAdapter adapter = new ItemAdapter(this,R.layout.layout_note, Singleton.getNotes().getItens());
+        adapter = new ItemAdapter(this,R.layout.layout_note, Singleton.getNotes().getItens());
         listview=((ListView)findViewById(R.id.listview_notes));
         listview.setAdapter(adapter);
 
@@ -74,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Erro ao salvar arquivo de atividades",Toast.LENGTH_LONG).show();
     }
 
-
     //Menu superior
     @Override
     // Carrega menu superior
@@ -95,11 +99,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.itemOrdenarPioridade:
-                //Implementar ordenação por prioridade;
+                Singleton.getNotes().getItens().sort((prio2,prio1)->Integer.compare(prio1.getPrioridade(), prio2.getPrioridade()));
+                adapter.notifyDataSetChanged();
                 break;
             case R.id.itemOrdenarInsercao:
-                //Carregar normal;
+                Singleton.getNotes().getItens().sort(Comparator.comparing(ord->ord.getOrd()));
+                adapter.notifyDataSetChanged();
                 break;
+            case R.id.itemOrdenarAlfabeto:
+                Singleton.getNotes().getItens().sort(Comparator.comparing(nome->nome.getNome().toLowerCase()));
+                adapter.notifyDataSetChanged();
+                break;
+
             case R.id.itemFechar:
                 finish();
                 break;

@@ -9,6 +9,9 @@
         android:id="@+id/itemOrdenarPioridade"
         android:title="Ordenar por prioridade" />
     <item
+        android:id="@+id/itemOrdenarAlfabeto"
+        android:title="Ordenar por Alfabético" />
+    <item
         android:id="@+id/itemOrdenarInsercao"
         android:title="Ordenar por inserção" />
     <item
