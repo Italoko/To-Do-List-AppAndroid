@@ -12,6 +12,7 @@ public class Notes implements Serializable {
     }
     public void add(Item i)
     {
+        i.setOrd(itens.size()+1);
         itens.add(i);
     }
     public boolean remove(int i)

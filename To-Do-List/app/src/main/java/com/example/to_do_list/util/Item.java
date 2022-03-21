@@ -2,7 +2,9 @@ package com.example.to_do_list.util;
 
 import java.io.Serializable;
 
-public class Item implements Serializable {
+public class Item implements Serializable{
+
+    private int ord; // ordem de inserção
     private String nome;
     private String descricao;
     private int prioridade;
@@ -35,5 +37,13 @@ public class Item implements Serializable {
 
     public void setPrioridade(int prioridade) {
         this.prioridade = prioridade;
+    }
+
+    public int getOrd() {
+        return ord;
+    }
+
+    public void setOrd(int ord) {
+        this.ord = ord;
     }
 }
