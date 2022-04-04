@@ -8,10 +8,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="410dp"
-        android:layout_height="368dp"
-        android:layout_marginTop="156dp"
+        android:layout_width="409dp"
+        android:layout_height="734dp"
         android:src="@mipmap/splash"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
